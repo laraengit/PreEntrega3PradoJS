@@ -166,34 +166,100 @@ function pedirTurno(nombre){
 
 }
 
-function consultaServicios(nombre,servicios,especialidades){
+function consultaServicios(servicios,especialidades,especBusq){
     //Buscador de servicios del consultorio
-    comoBusca = menu(nombre,"Consulta nuestros servicios disponibles", "1. Buscar por especialidad\n2.Mostrar todos",2)
     let servFiltrados
-    if (comoBusca == 1){
-        //Quiere buscar por especialidad
-        especBusq = menu(nombre,"Filtrar servicios por especialidad","1. Ginecología\n2.Oftalmología\n3.Cardiología\n4.Clínica\n5.Dermatología",5)
-        let indEspec = (especBusq - 1)
-        //Filtro 
+    let indEspec = (especBusq - 1)
+    //Filtro
+    if (indEspec!=5){
         servFiltrados = servicios.filter((serv)=>((serv.especialidad == especialidades[indEspec])) || (serv.especialidad == "Todas"))
-
-    }
-    else{
+    } else{
         servFiltrados = servicios
     }
     
-    //Armo un str para mostrar la info
-    let infoServ = `Los servicios que ofrecemos son: `
-    for (let serv of servFiltrados){
-        strServ = `\n\n${serv.servicio}\n    Precio: ${serv.precio}\n    Descripción: ${serv.descripcion}`
-        infoServ = infoServ + strServ
-    }
-    alert(infoServ)
+    return servFiltrados
 }
 
 function salir(nombre){
     alert(`¡Gracias por visitarnos ${nombre}!`)
 }
+
+//DOM
+//CAPTURA DOM
+let containerServicios = document.getElementById("servicios")
+let filtroServicios = document.getElementById("selectFiltrar")
+
+//Función DOM
+function mostrarCatalogoDOM(array){
+    //resetear el container
+    containerServicios.innerHTML = ""
+    //for of: para recorrer un array posición a posición
+    for(let serv of array){
+        
+        let servicioNuevo= document.createElement("div")
+        servicioNuevo.className = "col-12 col-md-6 col-lg-4 my-2"
+        servicioNuevo.innerHTML = `
+            <div id="${serv.id}" class="card mb-3" style="width: 100%;height: 100%;">
+                <div class="row no-gutters">
+                    <div class="col-md-6">
+                        <img class="card-img img-fluid" style="height: auto;  "src="images/${serv.imagen}" alt="${serv.servicio} de ${serv.especialidad} ">
+                    </div>
+                
+                    <div class="col-md-6">
+                        <div class="card-body">
+                            <h4 class="card-title">${serv.servicio}</h4>
+                            <p>${serv.especialidad}</p>
+                            <p>${serv.descripcion}</p>
+                            <p>Precio: $ ${serv.precio}</p>
+                        </div>
+                    </div>
+                </div>
+ 
+        </div> `
+        containerServicios.append(servicioNuevo)
+    }
+}
+
+//Filtrar por especialidad
+filtroServicios.addEventListener("change", () => {
+    // console.log("Detecto cambio")
+    console.log(filtroServicios.value)
+    let servFiltrados = consultaServicios(serviciosDisponibles,especialidades,filtroServicios.value)
+    mostrarCatalogoDOM(servFiltrados)
+    
+})
+
+//DARKMODE
+let btnToggle = document.getElementById("btnToggle")
+console.log(btnToggle)
+if(localStorage.getItem("modoOscuro")){
+    //si existe la calve en el storage
+
+}else{
+    //no existe la clave en el storage
+    console.log("SETEAMOS POR PRIMERA VEZ")
+    localStorage.setItem("modoOscuro", false)
+}
+
+if(JSON.parse(localStorage.getItem("modoOscuro")) == true){
+    document.body.classList.toggle("darkMode")
+    btnToggle.innerText = "Modo Claro"
+}
+
+//funcionamiento del botón
+btnToggle.addEventListener("click", () => {
+    document.body.classList.toggle("darkMode")
+    if(JSON.parse(localStorage.getItem("modoOscuro")) == false){
+        //ACA VOY A MODO OSCURO
+        btnToggle.innerText = "Modo claro"
+        localStorage.setItem("modoOscuro", true)
+    }
+    else if(JSON.parse(localStorage.getItem("modoOscuro")) == true){
+        //VOY A MODO CLARO
+        btnToggle.innerText = "Modo Oscuro"
+        localStorage.setItem("modoOscuro", false)
+    }
+})
 
 //Constructores y clases
 class PacienteNuevo{
@@ -211,11 +277,12 @@ class PacienteNuevo{
 
 }
 
-function Servicio(servicio,precio,descrip, especialidad) {
+function Servicio(servicio,precio,descrip, especialidad,imagen) {
     this.servicio = servicio;
     this.precio = precio;
     this.descripcion = descrip;
-    this.especialidad = especialidad
+    this.especialidad = especialidad;
+    this.imagen = imagen
 
 }
 //Datos del sistema
@@ -223,22 +290,23 @@ function Servicio(servicio,precio,descrip, especialidad) {
 const prepagasAceptadas = ["Swiss Medical","OSDE","Galeno","Medicus"]
 const especialidades = ["Ginecología","Oftalmología","Cardiología","Clínica","Dermatología"]
 
-const consulta = new Servicio("Consulta",7000,"Consulta con el especialista","Todas")
-const revision = new Servicio("Revisión de estudios",5000,"Consulta para revisar estudios solicitados previamente y dar una devolución con un plan de acción","Todas")
-const  pap = new Servicio("PAP",2000,"Papanicolau: para detectar cambios en las células del cuello uterino. Incluye la toma de muestras y el laboratorio. Lo reasliza un/a ginecólogo/a","Ginecología")
-const ecg = new Servicio("ECG",2000,"Electrocardiograma(ECG): Se estudia la actividad eléctrica del corazón. Lo realiza un/a cardiólogo/a o un técnico de ECG.","Cardiología")
-const ergometria = new Servicio("Ergometría",5000,"Es una prueba de ejercicio físico donde se registra la actividad del corazón con electrodos bajo esfuerzo. Puede hacerse en bicicleta o en cinta. En nuestro consultorio se realiza en cinta.","Cardiología")
-const peeling = new Servicio("Peeling",10000,"Peeling: Tratamiento dermatológico que busca renovar la dermis a partir de una solución química que exfolia las capas externas de la piel.","Dermatología")
-const fondoOjos = new Servicio("Fondo de ojos",2000,"Permite observar la parte posterior del interior del ojo. Para ello se usan gotas que dilatan las pupilas y cuyo efecto dura unas horas. Se usa para prevenir o hacer el seguimiento de enfermedades.","Oftalmología")
+const consulta = new Servicio("Consulta",7000,"Consulta con el especialista. Para chequeos de rutina o para consultar por sítnomas o cuadros específicos. ","Todas","consulta.jpg")
+const revision = new Servicio("Revisión de estudios",5000,"Consulta para revisar estudios solicitados previamente y dar una devolución con un plan de acción","Todas","revisionEstudios.jpg")
+const  pap = new Servicio("PAP",2000,"Papanicolau: para detectar cambios en las células del cuello uterino. Incluye la toma de muestras y el laboratorio. Lo reasliza un/a ginecólogo/a","Ginecología","pap.jpg")
+const ecg = new Servicio("ECG",2000,"Electrocardiograma(ECG): Se estudia la actividad eléctrica del corazón. Lo realiza un/a cardiólogo/a o un técnico de ECG.","Cardiología","ecg.jpg")
+const ergometria = new Servicio("Ergometría",5000,"Es una prueba de ejercicio físico donde se registra la actividad del corazón con electrodos bajo esfuerzo. Puede hacerse en bicicleta o en cinta. En nuestro consultorio se realiza en cinta.","Cardiología","ergometria.jpg")
+const peeling = new Servicio("Peeling",10000,"Peeling: Tratamiento dermatológico que busca renovar la dermis a partir de una solución química que exfolia las capas externas de la piel.","Dermatología","peeling.jpeg")
+const fondoOjos = new Servicio("Fondo de ojos",2000,"Permite observar la parte posterior del interior del ojo. Para ello se usan gotas que dilatan las pupilas y cuyo efecto dura unas horas. Se usa para prevenir o hacer el seguimiento de enfermedades.","Oftalmología","fondoOjos.jpg")
 
 const serviciosDisponibles = [consulta,revision, pap, ecg, peeling, fondoOjos, ergometria]
 
 
 //Diálogo
-let nombre
+/* let nombre
 do{
     nombre = prompt("Bienvenido al sitio web del consultorio! Ingresá tu nombre para comenzar: ")
 
 }while(nombre === null)
 menuPrincipal(nombre)
-
+ */
+mostrarCatalogoDOM(serviciosDisponibles)

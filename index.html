@@ -14,7 +14,7 @@
   
 </head>
 <body class="estilosBody">
-      <div id= "contenedor" class="gridBody gridBodyInicio darkMode ">
+      <div id= "contenedor" class="gridBody gridBodyInicio  ">
         <nav class="navbar navbar-expand-lg bg-body-tertiary .gridHeader">
             <div class="container-fluid d-flex">
               <a class="navbar-brand" href="#">Consultorios BA</a>
@@ -51,22 +51,53 @@
             </div>
           </nav>
         
-        <div id="encabezado" class="gridMain">
+        <div id="encabezado" class="secc gridMain">
             <h1>Consultorios BA</h1>
             <h2>Cuidando tu salud</h2>
           </div>
     
-          <div id="servicios" class="tienda gridServ">
-            <h3>Nuestros Servicios</h3>
+          <div  class=" secc tienda gridServ">
+            <div class="titularServicios">
+                <h3 class="titularServ">Nuestros Servicios</h3>
+                <div class = "selectFiltradoEstilo">
+                    <ul>
+                        <label for="selectFiltrar">Filtrar por:</label>
+                        <select id="selectFiltrar" class="form-select form-select-sm" aria-label=".form-select-sm example" def>
+                        <option selected value = "6">Todas</option>
+                        <option value="1">Ginecología</option>
+                        <option value="2">Oftalmología</option>
+                        <option value="3">Cardiología</option>
+                        <option value="4">Clínica</option>
+                        <option value="5">Dermatología</option>
+                        
+                        </select>
+                    </ul>
+                </div>
+
+            </div>
+            
+            
+            <div id="servicios" class="row">
+            </div>
             
           </div>
     
-          <div id="turno" class="datos gridTurnos">
+          <div id="turno" class="secc datos gridTurnos">
             <h3>Pedí tu turno</h3>
+            <button id="btnIngresado" class="btn btn-success mx-3">Ya soy paciente</button>
+            <button id="btnNuevo" class="btn btn-info mx-3">Soy nuevo paciente</button>   
+            <div class="infoPaciente">
+                <!-- <form action="">
+                    <input type="text" name="Nombre" id="">
+
+                </form> -->
+            </div>
           </div>
     
-          <div id="herramientas" class="gridHerr">
+          <div id="herramientas" class="secc gridHerr">
             <h3>Herramientas para cuidar tu salud</h3>
+            <button id="btnPresión" class="btn btn-danger mx-3">Chequear presión</button>
+            <button id="btnwarning" class="btn btn-info mx-3">Calcular Índice de Masa Corporal</button>
           </div>
     
         <footer id="footer" class="pie gridFooter">
@@ -94,7 +125,7 @@
     <!-- Boostrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <!-- Propio -->
-    <!-- <script src="./interact.js"></script> -->
+    <script src="./interact.js"></script>
     
 </body>
 </html>
