@@ -1,0 +1,76 @@
+/* Diseño */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+    text-decoration: none;
+}
+
+.estilosBody {
+    background-color: rgb(227, 250, 252);
+    font-family: 'Quicksand', sans-serif;
+}
+
+/* .darkMode{
+    color:white;
+    background-color: black;
+} */
+    
+/* Grid */
+
+
+
+.gridBody {
+    
+    display: grid;
+    width: auto;
+    height:100vh;
+}
+/* Index */
+
+.gridBodyInicio {
+    @extend .gridBody;
+    grid-template-areas:
+    "encabezado"
+    "principal"
+    "sevicios"
+    "servicios"
+    "turnos"
+    "herramientas"
+    "pie";
+    grid-template-rows:1fr 3fr 3fr 3fr 3fr 3fr 1fr;
+    //grid-template-columns: auto;
+    .gridHeader {
+        grid-area: encabezado;
+    }
+    .gridMain {
+        grid-area: principal;
+    }
+    .gridServ{
+        grid-area: servicios;
+    }
+    .gridTurnos {
+        grid-area: turnos;
+    }
+
+    .gridHerr{
+        grid-area: herramientas;
+    
+    }
+    .gridFooter {
+        grid-area: pie;
+    }
+}
+
+/* Estructura interna */
+.pie{
+    background-color: aliceblue;
+    //margin: 1%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+    
+}

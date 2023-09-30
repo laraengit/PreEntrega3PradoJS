@@ -1,0 +1,59 @@
+@charset "UTF-8";
+/* Diseño */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style: none;
+  text-decoration: none;
+}
+
+.estilosBody {
+  background-color: rgb(227, 250, 252);
+  font-family: "Quicksand", sans-serif;
+}
+
+/* .darkMode{
+    color:white;
+    background-color: black;
+} */
+/* Grid */
+.gridBody, .gridBodyInicio {
+  display: grid;
+  width: auto;
+  height: 100vh;
+}
+
+/* Index */
+.gridBodyInicio {
+  grid-template-areas: "encabezado" "principal" "sevicios" "servicios" "turnos" "herramientas" "pie";
+  grid-template-rows: 1fr 3fr 3fr 3fr 3fr 3fr 1fr;
+}
+.gridBodyInicio .gridHeader {
+  grid-area: encabezado;
+}
+.gridBodyInicio .gridMain {
+  grid-area: principal;
+}
+.gridBodyInicio .gridServ {
+  grid-area: servicios;
+}
+.gridBodyInicio .gridTurnos {
+  grid-area: turnos;
+}
+.gridBodyInicio .gridHerr {
+  grid-area: herramientas;
+}
+.gridBodyInicio .gridFooter {
+  grid-area: pie;
+}
+
+/* Estructura interna */
+.pie {
+  background-color: aliceblue;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  text-align: center;
+}/*# sourceMappingURL=main.css.map */
