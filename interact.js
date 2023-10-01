@@ -178,6 +178,9 @@ let resultIMC = document.getElementById("resultIMC")
 let btnIngresado = document.getElementById("btnIngresado")
 let btnNuevo = document.getElementById("btnNuevo")
 let infoPaciente = document.getElementById("divInfoPaciente")
+let servAgregado = document.getElementById("servAgregados")
+let precioServ = document.getElementById("precioServ")
+let divSolTurno = document.getElementById("divSolTurno")
 
 
 
@@ -195,6 +198,7 @@ function mostrarCatalogoDOM(array){
                 <div class="row no-gutters">
                     <div class="col-md-6">
                         <img class="card-img img-fluid" style="height: auto;  "src="images/${serv.imagen}" alt="${serv.servicio} de ${serv.especialidad} ">
+                        
                     </div>
                 
                     <div class="col-md-6">
@@ -204,12 +208,51 @@ function mostrarCatalogoDOM(array){
                             <p>${serv.descripcion}</p>
                             <p>Precio: $ ${serv.precio}</p>
                         </div>
+                        
                     </div>
                 </div>
+                <button id="btnAgregar${serv.servicio}" class="btn btn-secondary mx-5 bottom">Seleccionar</button>
+                
  
         </div> `
+
         containerServicios.append(servicioNuevo)
+
+        let agregarBtn = document.getElementById(`btnAgregar${serv.servicio}`)
+        console.log(agregarBtn)
+        agregarBtn.addEventListener("click", () => {
+            arrServSeleccionados.push(serv)
+            mostrarServSelecc(arrServSeleccionados)
+            let total = arrServSeleccionados.reduce((acc,elem) => acc + elem.precio, 0)
+            precioServ.innerHTML = `Total: ${total}`
+
+        })
     }
+}
+
+function mostrarServSelecc(array){
+    //resetear el container
+    servAgregado.innerHTML = ""
+    //for of: para recorrer un array posición a posición
+    for(let serv of array){
+        
+        let servicioNuevo= document.createElement("div")
+        servicioNuevo.className = ""
+        servicioNuevo.innerHTML = `
+            <div id="${serv.id}" class="card" style="width: 100%;">
+                
+                    
+                <div class="card-body">
+                    <h4 class="card-title">${serv.servicio}</h4>
+                    <p>Precio: $ ${serv.precio}</p>
+                </div>
+                
+        </div> `
+
+        servAgregado.append(servicioNuevo)
+
+    }
+
 }
 
 //Filtrar por especialidad
@@ -225,17 +268,26 @@ filtroServicios.addEventListener("change", () => {
 btnIngresado.addEventListener("click", () => {
     infoPaciente.innerHTML = `<form action="">
     <label for="DNI">DNI: </label>
-    <input type="text" name="Nombre" id="">
+    <input type="text" name="Nombre" id="nombre" required>
     <label for="">Disponibilidad:</label>
-    <select name="" id="idAgenda">
+    <select name="" id="idAgenda" required>
         <option value="1">Mañana</option>
         <option value="2">Tarde</option>
         <option value="3">Indistinto</option>
     </select>
-    
+    <input type="submit" value="Solicitar Turno" class="btn-danger">
 
+    
 </form>`
+    /* divSolTurno.innerHTML(`<button id="btnSolicitarTurno" class="btn btn-secondary mx-5 bottom">Solicitar turno</button>`)
+    let btnSolicTurno = document.getElementById("btnSolicitarTurno")
+    btnSolicTurno.addEventListener("click", () => {
+        if(nombre){}
+
+        }
+    
      
+    }) */
 })
 
 btnNuevo.addEventListener("click", () => {
@@ -243,19 +295,19 @@ btnNuevo.addEventListener("click", () => {
     <label for="Nombre">Nombre: </label>
     <input type="text" name="Nombre" id="">
     <label for="Nombre">Apellido: </label>
-    <input type="text" name="Nombre" id="">
+    <input type="text" name="Nombre" id="" required>
     <label for="DNI">DNI: </label>
-    <input type="text" name="Nombre" id="">
+    <input type="text" name="Nombre" id="" required>
     <label for="DNI">Celular: </label>
-    <input type="text" name="Nombre" id="">
+    <input type="text" name="Nombre" id="" required>
     <label for="">Disponibilidad:</label>
-    <select name="" id="idAgenda">
+    <select name="" id="idAgenda" required>
         <option value="1">Mañana</option>
         <option value="2">Tarde</option>
         <option value="3">Indistinto</option>
     </select>
     <label for="">Selecioná tu prepaga:</label>
-    <select name="prepaga" id="idPrepaga">
+    <select name="prepaga" id="idPrepaga" required>
         <option value="1">Swiss Medical</option>
         <option value="2">OSDE</option>
         <option value="3">Galeno</option>
@@ -263,6 +315,7 @@ btnNuevo.addEventListener("click", () => {
         <option value="5">Otra/No tengo</option>
     </select>
     <div id="cubrePrepaga"></div>
+    <input type="submit" value="Solicitar Turno" class="btn-danger">
     
     </form>`
     let cubrePrepaga = document.getElementById("cubrePrepaga")
@@ -278,8 +331,6 @@ btnNuevo.addEventListener("click", () => {
     })
      
 })
-
-
 
 
 
@@ -385,6 +436,8 @@ const peeling = new Servicio("Peeling",10000,"Peeling: Tratamiento dermatológic
 const fondoOjos = new Servicio("Fondo de ojos",2000,"Permite observar la parte posterior del interior del ojo. Para ello se usan gotas que dilatan las pupilas y cuyo efecto dura unas horas. Se usa para prevenir o hacer el seguimiento de enfermedades.","Oftalmología","fondoOjos.jpg")
 
 const serviciosDisponibles = [consulta,revision, pap, ecg, peeling, fondoOjos, ergometria]
+
+const arrServSeleccionados = []
 
 
 //Diálogo

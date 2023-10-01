@@ -57,23 +57,41 @@
 }
 
 #turno{
-    >div{
-        margin: 1%;
+    .flexR{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around
     }
-    .infoPaciente{
-        form{
-
-            :nth-child(n){
-                //width: 100%;
-                margin: 0.5%;
-                display: block;
-                text-align: left;
-            }
-
-        }
+    .seccPaciente, .servPaciente{
+        margin: 1%;
+        padding: 1%;
         
     }
+   
+
+    .botonesTurno{
+        display: inline;
+    }
+    
+    
 }
+
+#divInfoPaciente{
+    form{
+        :nth-child(n){
+            width: 100%;
+            margin:1%;
+            padding: 1%;
+            border: 0%;
+            
+            display: block;
+            text-align: left;
+        }
+
+    }
+    
+}
+
 
 
 .darkMode{
