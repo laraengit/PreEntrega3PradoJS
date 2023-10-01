@@ -14,7 +14,7 @@
   
 </head>
 <body class="estilosBody">
-      <div id= "contenedor" class="gridBody gridBodyInicio  ">
+    <div id= "contenedor" class="gridBody gridBodyInicio  ">
         <nav class="navbar navbar-expand-lg bg-body-tertiary .gridHeader">
             <div class="container-fluid d-flex">
               <a class="navbar-brand" href="#">Consultorios BA</a>
@@ -54,9 +54,9 @@
         <div id="encabezado" class="secc gridMain">
             <h1>Consultorios BA</h1>
             <h2>Cuidando tu salud</h2>
-          </div>
+        </div>
     
-          <div  class=" secc tienda gridServ">
+        <div  class=" secc tienda gridServ">
             <div class="titularServicios">
                 <h3 class="titularServ">Nuestros Servicios</h3>
                 <div class = "selectFiltradoEstilo">
@@ -80,9 +80,9 @@
             <div id="servicios" class="row">
             </div>
             
-          </div>
+        </div>
     
-          <div id="turno" class="secc datos gridTurnos">
+        <div id="turno" class="secc datos gridTurnos">
             <h3>Pedí tu turno</h3>
             <button id="btnIngresado" class="btn btn-success mx-3">Ya soy paciente</button>
             <button id="btnNuevo" class="btn btn-info mx-3">Soy nuevo paciente</button>   
@@ -92,13 +92,50 @@
 
                 </form> -->
             </div>
-          </div>
+        </div>
     
-          <div id="herramientas" class="secc gridHerr">
+        <div id="herramientas" class="secc gridHerr">
             <h3>Herramientas para cuidar tu salud</h3>
-            <button id="btnPresión" class="btn btn-danger mx-3">Chequear presión</button>
-            <button id="btnwarning" class="btn btn-info mx-3">Calcular Índice de Masa Corporal</button>
-          </div>
+            <div class="herr">
+                <div id = "presion" class="herrSub">
+                    <h4>Revisá tus valores de presión</h4>
+                    <p>Ingrá los valores que te tomaste y te decimos si están bien. Recordá que siempre se requiere un chequeo completo</p>
+
+                    <form action="">
+                        <label for="presionS">Presión sistólica</label>
+                        <input type="text" name="presionS" id="idPrS">
+                        <label for="presionD">Presión diastólica</label>
+                        <input type="text" name="presionD" id="idPrD">
+                    </form>
+    
+                    <button id="btnPresion" class="btn btn-danger mx-3">Chequear presión</button>
+
+                    <div id="resultPresion">
+                        
+                    </div>
+    
+                </div>
+    
+                <div  class= "herrSub">
+                    <h4>Calculá tu IMC</h4>
+                    <p>Calculá tu índice de masa corporal (IMC). Con tu peso y altura podemos estimar la masa en tu cuerpo. En principio un imc saludable está entre 20 y 25, pero no es definitivo!</p>
+                    <form action="">
+                        <label for="peso">Peso</label>
+                        <input type="text" name="peso" id="idPeso">
+                        <label for="altura">Altura</label>
+                        <input type="text" name="presionD" id="idAltura">
+                    </form>
+                    <button id="btnIMC" class="btn btn-secondary mx-3">Calcular IMC</button>
+                    <div id="resultIMC"></div>
+                </div>
+
+            </div>
+            
+            
+
+        </div>
+
+        
     
         <footer id="footer" class="pie gridFooter">
             <div class=" logo">

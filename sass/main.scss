@@ -18,7 +18,7 @@
     padding: 3%;
     border-radius: 10px;
     text-align: center;
-    background-color: rgba(255, 255, 255, 0.719);
+    background-color: rgba(255, 255, 255, 0.619);
     .tienda .titularServicios:nth-child(n) {
         display: inline;
     }
@@ -29,10 +29,33 @@
 }
 
 #herramientas{
+    .herr{
+        text-align: center;
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: center;
+        padding: 0;
+        .herrSub{
+            width: 40%;
+            text-align: center;
+            /* display: flex;
+            flex-flow: column wrap;*/
+            form{
+                display: flex;
+                flex-direction: column;
+            };
+        }
+        #presion{
+            border-right: thin solid #243d6a;
+        }
+    }
     :nth-child(n){
         margin: 1%;
+        
     }
+  
 }
+
 
 .darkMode{
     color:white;

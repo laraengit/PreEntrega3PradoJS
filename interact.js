@@ -56,41 +56,19 @@ function menuPrincipal (nombre){
     }
 }
 
-function imc(nombre){
-    //Obtengo peso y altura
-    let peso
-    let altura
-    do{
-        peso = parseFloat(prompt(`${nombre} ingresá tu peso. El peso debe estás en kg . Usá punto (".") en el caso que ingreses decimales.`))
-        console.log(`Peso: El usuario ingresó ${peso}`)
-    }while(!parseFloat(peso))
-    do{
-        altura = parseFloat(prompt(`${nombre} ingresá tu altura. La altura debe estar en metros. Usá punto (".") en el caso que ingreses decimales.`))
-        console.log(`Altura: El usuario ingresó ${altura}`)
-    }while(!parseFloat(altura))
-    //Hago el calculo
+function imc(peso,altura){
+    console.log(peso)
+    console.log(altura)
     let imc = peso/(altura**2)
-    //Informo
-    alert(`${nombre}, tu IMC es de ${imc}`)
-    console.log(`El IMC es de ${imc}`)
+    console.log(imc)
+    return imc
     
 }
 
-function presion(nombre){
-    //Obtengo valores de presion
-    let sist
-    let diast
-    do{
-        sist = parseFloat(prompt(`${nombre} ingresá la presión sistólica.`))
-        console.log(`Sistólica: El usuario ingresó ${sist}`)
-    }while(!parseFloat(sist))
-    do{
-        diast = parseFloat(prompt(`${nombre} ingresá la presión diastólica.`))
-        console.log(`Diastólica: El usuario ingresó ${diast}`)
-    }while(!parseFloat(diast))
+function presion(sist,diast){
     
     //veo en donde cae
-    let resultado = `${nombre} los valores de presión ingresados ${sist}/${diast} son correspondientes a `
+    let resultado = `Los valores de presión ingresados son correspondientes a `
 
     if (sist>=180 || diast>=120){
         resultado = resultado + "una Hipertensión de Grado 3. Solicite atención médica."
@@ -109,7 +87,7 @@ function presion(nombre){
     else {
         resultado = resultado + "tensión baja. Solicite atención médica. "
     }
-    alert(resultado)
+    return resultado
 }
 
 
@@ -188,6 +166,15 @@ function salir(nombre){
 //CAPTURA DOM
 let containerServicios = document.getElementById("servicios")
 let filtroServicios = document.getElementById("selectFiltrar")
+let btnPresion = document.getElementById("btnPresion")
+let presionSis = document.getElementById("idPrS")
+let presionDias = document.getElementById("idPrD")
+let btnimc = document.getElementById("btnIMC")
+let peso = document.getElementById("idPeso")
+let altura = document.getElementById("idAltura")
+let resultPresion = document.getElementById("resultPresion")
+let resultIMC = document.getElementById("resultIMC")
+
 
 //Función DOM
 function mostrarCatalogoDOM(array){
@@ -228,6 +215,38 @@ filtroServicios.addEventListener("change", () => {
     mostrarCatalogoDOM(servFiltrados)
     
 })
+
+//Herramientas
+//Presion
+btnPresion.addEventListener("click", () => {
+    let resultado
+    
+    console.log(presionSis.value)
+    if((!parseFloat(presionSis.value))||(!parseFloat(presionDias.value))){
+        alert("Debes ingresar valores numéricos")
+        resultado = ""
+    }else{
+        resultado = presion(parseFloat(presionSis.value),parseFloat(presionDias.value))
+        console.log(resultado)
+        resultPresion.innerText = `${resultado}`
+    }
+     
+})
+//IMC
+btnimc.addEventListener("click", () => {
+    let resultadoimc
+    if((!parseFloat(peso.value))||(!parseFloat(altura.value))){
+        alert("Debes ingresar valores numéricos")
+        resultadoimc = ""
+    }else{
+        resultadoimc = imc(parseFloat(peso.value),parseFloat(altura.value))
+        console.log(resultadoimc)
+        resultIMC.innerText = `Su IMC es: ${resultadoimc}`
+    }
+     
+})
+
+
 
 //DARKMODE
 let btnToggle = document.getElementById("btnToggle")
