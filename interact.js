@@ -174,6 +174,11 @@ let peso = document.getElementById("idPeso")
 let altura = document.getElementById("idAltura")
 let resultPresion = document.getElementById("resultPresion")
 let resultIMC = document.getElementById("resultIMC")
+//Turnos
+let btnIngresado = document.getElementById("btnIngresado")
+let btnNuevo = document.getElementById("btnNuevo")
+let infoPaciente = document.getElementById("divInfoPaciente")
+
 
 
 //Función DOM
@@ -215,6 +220,68 @@ filtroServicios.addEventListener("change", () => {
     mostrarCatalogoDOM(servFiltrados)
     
 })
+
+//Turnos
+btnIngresado.addEventListener("click", () => {
+    infoPaciente.innerHTML = `<form action="">
+    <label for="DNI">DNI: </label>
+    <input type="text" name="Nombre" id="">
+    <label for="">Disponibilidad:</label>
+    <select name="" id="idAgenda">
+        <option value="1">Mañana</option>
+        <option value="2">Tarde</option>
+        <option value="3">Indistinto</option>
+    </select>
+    
+
+</form>`
+     
+})
+
+btnNuevo.addEventListener("click", () => {
+    infoPaciente.innerHTML = `<form action="">
+    <label for="Nombre">Nombre: </label>
+    <input type="text" name="Nombre" id="">
+    <label for="Nombre">Apellido: </label>
+    <input type="text" name="Nombre" id="">
+    <label for="DNI">DNI: </label>
+    <input type="text" name="Nombre" id="">
+    <label for="DNI">Celular: </label>
+    <input type="text" name="Nombre" id="">
+    <label for="">Disponibilidad:</label>
+    <select name="" id="idAgenda">
+        <option value="1">Mañana</option>
+        <option value="2">Tarde</option>
+        <option value="3">Indistinto</option>
+    </select>
+    <label for="">Selecioná tu prepaga:</label>
+    <select name="prepaga" id="idPrepaga">
+        <option value="1">Swiss Medical</option>
+        <option value="2">OSDE</option>
+        <option value="3">Galeno</option>
+        <option value="4">Medicus</option>
+        <option value="5">Otra/No tengo</option>
+    </select>
+    <div id="cubrePrepaga"></div>
+    
+    </form>`
+    let cubrePrepaga = document.getElementById("cubrePrepaga")
+    let prepagaSelect = document.getElementById("idPrepaga")
+    prepagaSelect.addEventListener("change", () => {
+        // console.log("Detecto cambio")
+        console.log(prepagaSelect.value)
+        if (prepagaSelect.value != 5){
+            cubrePrepaga.innerText = "Tu prepaga cubre la atención médica en este consultorio"
+        }else{
+            cubrePrepaga.innerText = "Deberás ingresar como privado"
+        }
+    })
+     
+})
+
+
+
+
 
 //Herramientas
 //Presion

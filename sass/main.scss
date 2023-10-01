@@ -56,6 +56,25 @@
   
 }
 
+#turno{
+    >div{
+        margin: 1%;
+    }
+    .infoPaciente{
+        form{
+
+            :nth-child(n){
+                //width: 100%;
+                margin: 0.5%;
+                display: block;
+                text-align: left;
+            }
+
+        }
+        
+    }
+}
+
 
 .darkMode{
     color:white;
@@ -111,6 +130,7 @@
 /* Estructura interna */
 .pie{
     background-color: rgb(247, 247, 247);
+    color: #243d6a;
     //margin: 1%;
     padding: 1%;
     display: flex;
